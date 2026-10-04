@@ -74,9 +74,9 @@ export default function ProductCard({ product }: { product: Product })  {
         <div className="flex items-center justify-between mt-2">
           <div className="flex items-baseline gap-2">
             <span className="text-slate-900 font-bold text-lg">
-              {product.priceAfterDiscount || product.price} EGP
+              {product.price || product.price} EGP
             </span>
-            {product.priceAfterDiscount && (
+            {product.price && (
               <span className="text-gray-400 text-xs line-through">
                 {product.price} EGP
               </span>

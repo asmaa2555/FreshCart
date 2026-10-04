@@ -314,13 +314,13 @@ export function WishlistProductCard({ product }: { product: Product }) {
 
         <div className="text-right md:text-center">
           <div className="font-semibold text-gray-900">
-            {product.priceAfterDiscount
-              ? product.priceAfterDiscount
+            {product.price
+              ? product.price
               : product.price}{" "}
             EGP
           </div>
 
-          {product.priceAfterDiscount && (
+          {product.price && (
             <div className="text-sm font-medium text-gray-400 line-through">
               {product.price} EGP
             </div>

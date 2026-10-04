@@ -26,6 +26,7 @@ export default function Register() {
       password: "",
       rePassword: "",
       phone: "",
+      terms: false,
     },
   });
 

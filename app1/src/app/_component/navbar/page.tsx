@@ -9,6 +9,8 @@ import {
   ShoppingCart,
   User,
   Headphones,
+  Menu,
+  X,
 } from "lucide-react";
 
 import {
@@ -28,6 +30,7 @@ import { useSession, signOut } from "next-auth/react";
 
 export default function Navbar() {
   const { status } = useSession();
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   function handleLogOut() {
     signOut({
@@ -40,7 +43,6 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 bg-white border-b border-gray-100">
       <div className="max-w-7xl mx-auto h-20 flex items-center justify-between gap-4 px-4">
 
-        
         <Link href="/">
           <Image
             src={logo}
@@ -52,7 +54,6 @@ export default function Navbar() {
           />
         </Link>
 
-        
         <div className="hidden md:flex flex-1 max-w-md mx-2 relative">
           <div className="relative w-full">
             <Input
@@ -79,7 +80,7 @@ export default function Navbar() {
             <NavigationMenuItem>
               <NavigationMenuLink
                 href="/"
-                className="px-3 py-2 hover:text-green-600  transition-colors"
+                className="px-3 py-2 hover:text-green-600 transition-colors"
               >
                 Home
               </NavigationMenuLink>
@@ -102,7 +103,7 @@ export default function Navbar() {
               </NavigationMenuTrigger>
 
               <NavigationMenuContent>
-                <ul className="flex flex-col w-52 p-1 bg-white rounded-2xl ">
+                <ul className="flex flex-col w-52 p-1 bg-white rounded-2xl">
 
                   {/* Categories */}
                   <li className="hover:bg-green-50 rounded-xl">
@@ -110,7 +111,7 @@ export default function Navbar() {
                       href="/categories"
                       className="block px-4 py-2.5 text-sm font-medium text-gray-700 hover:text-green-600 rounded-xl transition-colors"
                     >
-                     All Categories
+                      All Categories
                     </Link>
                   </li>
 
@@ -171,8 +172,7 @@ export default function Navbar() {
           </NavigationMenuList>
         </NavigationMenu>
 
-        
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 sm:gap-4">
 
           {/* Support */}
           <div className="hidden xl:flex items-center gap-2.5 border-r pr-4 border-gray-200">
@@ -180,19 +180,32 @@ export default function Navbar() {
               <Headphones className="size-5" />
             </div>
 
-<Link 
-  href="/contact" 
-  className="flex flex-col text-xs leading-tight hover:opacity-80 transition-opacity cursor-pointer"
->
-  <span className="text-gray-400 font-normal">
-    Support
-  </span>
+            <Link
+              href="/contact"
+              className="flex flex-col text-xs leading-tight hover:opacity-80 transition-opacity cursor-pointer"
+            >
+              <span className="text-gray-400 font-normal">
+                Support
+              </span>
 
-  <span className="font-bold text-gray-900">
-    24/7 Help
-  </span>
-</Link>
-</div>
+              <span className="font-bold text-gray-900">
+                24/7 Help
+              </span>
+            </Link>
+          </div>
+
+          <Button
+            variant="ghost"
+            size="icon"
+            className="lg:hidden text-gray-700 hover:text-green-600"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? (
+              <X className="size-6" />
+            ) : (
+              <Menu className="size-6" />
+            )}
+          </Button>
 
           {/* Wishlist */}
           <Link
@@ -230,6 +243,46 @@ export default function Navbar() {
 
         </div>
       </div>
+
+      {isMenuOpen && (
+        <div className="lg:hidden border-t border-gray-100 bg-white px-4 py-4 shadow-sm">
+          <nav className="flex flex-col gap-1">
+
+            <Link
+              href="/"
+              onClick={() => setIsMenuOpen(false)}
+              className="px-4 py-3 rounded-xl text-gray-700 hover:bg-green-50 hover:text-green-600"
+            >
+              Home
+            </Link>
+
+            <Link
+              href="/shop"
+              onClick={() => setIsMenuOpen(false)}
+              className="px-4 py-3 rounded-xl text-gray-700 hover:bg-green-50 hover:text-green-600"
+            >
+              Shop
+            </Link>
+
+            <Link
+              href="/categories"
+              onClick={() => setIsMenuOpen(false)}
+              className="px-4 py-3 rounded-xl text-gray-700 hover:bg-green-50 hover:text-green-600"
+            >
+              Categories
+            </Link>
+
+            <Link
+              href="/brands"
+              onClick={() => setIsMenuOpen(false)}
+              className="px-4 py-3 rounded-xl text-gray-700 hover:bg-green-50 hover:text-green-600"
+            >
+              Brands
+            </Link>
+
+          </nav>
+        </div>
+      )}
     </header>
   );
 }

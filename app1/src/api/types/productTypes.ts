@@ -3,9 +3,9 @@ export interface Product {
   title: string;
   slug: string;
   description?: string;
-  quantity?: number;
-  price?: number;
-  imageCover?: string;
+  quantity: number;
+  price: number;
+  imageCover: string;
   images: string[];
   category: Category;
   subcategory: Subcategory[];

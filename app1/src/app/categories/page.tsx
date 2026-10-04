@@ -4,15 +4,15 @@ import React from "react";
 
 import { getCategories } from "@/api/services/categories.service";
 import CategoryCard from "../_component/CategoryCard/CategoryCard";
-import { Category } from '../../api/types/cartTypes';
-import { CategoriesResponseType } from '@/api/types/response.types';
+import { CategoryType } from '../../api/types/category.types';
 
 export default async function Categories() {
-  const categories: CategoriesResponseType = await getCategories();
+const categoriesResponse = await getCategories();
+const categories: CategoryType[] = categoriesResponse.data;
 
   return (
     <div className="min-h-screen bg-gray-50/50">
-      <div className="bg-gradient-to-br from-green-600 via-green-500 to-green-400 text-white">
+      <div className="bg-linear-to-br from-green-600 via-green-500 to-green-400 text-white">
         <div className="container mx-auto px-4 py-12 sm:py-16">
           <nav className="flex items-center gap-2 text-sm font-medium text-white/70 mb-6">
             <Link
@@ -60,13 +60,13 @@ export default async function Categories() {
 
       <div className="container mx-auto px-4 py-10">
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6">
-          {categories?.data?.map((Category) => (
-            <CategoryCard
-              key={Category._id}
-              category={Category}
-            />
-          ))}
-        </div>
+  {categories?.map((Category) => (
+    <CategoryCard
+      key={Category._id}
+      category={Category}
+    />
+  ))}
+</div>
       </div>
     </div>
   );

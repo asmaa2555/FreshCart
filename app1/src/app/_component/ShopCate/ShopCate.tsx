@@ -13,7 +13,7 @@ export default async function ShopCate() {
   const categories: Category[] = await getShopCate();
 
   return (
-    <section className="my-10 px-4">
+    <section className="my-10 px-4 mx-10">
       <div className="flex items-center justify-between mb-8">
         <div className="flex items-center gap-3">
           <span className="h-8 w-1.5 bg-emerald-600 rounded-full shrink-0"></span>
